@@ -4688,6 +4688,11 @@ dotenv@8.2.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
+dotenv@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.npm.taobao.org/dotenv/download/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha1-l+YZJZradQ7qPk6j4mvO6lQksWo=
+
 downshift@3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/downshift/-/downshift-3.2.7.tgz#0c40d78d1cbc24753c7a622cfc664df1c9480b4a"
@@ -9894,21 +9899,6 @@ ra-core@^3.4.1:
     query-string "^5.1.1"
     recompose "~0.26.0"
     reselect "~3.0.0"
-
-ra-data-json-server@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/ra-data-json-server/-/ra-data-json-server-3.4.1.tgz#c8fb6008e293e09bdb5f0bd8e68f83fb3c66d416"
-  integrity sha512-jRTALjGy4tUMYZL6MvrYNvDa+7O0YHEv7aFoc/r4nMX2G1+H/oH3H2BBWKhJeSMz828rhLPAaYTPj2F2NOYmRQ==
-  dependencies:
-    query-string "^5.1.1"
-    ra-core "^3.4.1"
-
-ra-data-simple-rest@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/ra-data-simple-rest/-/ra-data-simple-rest-3.3.2.tgz#cf64a830b88571af6f9ecfdeee96ec2501fa79ca"
-  integrity sha512-BaV3jGYaT0bLo1KkaC5nLt3FBxdhmv1lXItBT0oPkXfjnQgiMDIJkZIjvkOCJofDSW8L4M/Tkc2uQ5u+MBS81w==
-  dependencies:
-    query-string "^5.1.1"
 
 ra-i18n-polyglot@^3.4.1:
   version "3.4.1"
