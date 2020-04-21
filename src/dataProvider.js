@@ -1,9 +1,22 @@
 import axios from 'axios'
 import { stringify } from 'query-string'
-import { API } from '../config'
-const httpClient = axios.create({})
+import { RESOURCE_API } from './config'
+const httpClient = axios.create({
+  baseURL: RESOURCE_API,
+})
 
-httpClient.interceptors.response.use((res) => res.data)
+httpClient.interceptors.response.use(res => res.data)
+
+httpClient.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      config['headers'] = { Authorization: `Bearer ${token}` }
+    }
+    return config
+  },
+  error => console.error(error),
+)
 
 export default {
   getList(resource, params) {
@@ -12,22 +25,22 @@ export default {
 
     const query = {
       sort: JSON.stringify([field, order]),
-      filter :JSON.stringify(params.filter),
+      filter: JSON.stringify(params.filter),
       perPage,
-      page
+      page,
     }
 
-    const url = `${API}/${resource}?${stringify(query)}`
+    const url = `${resource}?${stringify(query)}`
     return httpClient.get(url)
   },
   getOne(resource, params) {
-    return httpClient.get(`${API}/${resource}/${params.id}`)
+    return httpClient.get(`${resource}/${params.id}`)
   },
   getMany(resource, params) {
     const query = {
       filter: JSON.stringify({ id: params.ids }),
     }
-    const url = `${API}/${resource}?${stringify(query)}`
+    const url = `${resource}?${stringify(query)}`
     return httpClient.get(url)
   },
   getManyReference(resource, params) {
@@ -41,35 +54,29 @@ export default {
         [params.target]: params.id,
       }),
     }
-    const url = `${API}/${resource}?${stringify(query)}`
+    const url = `${resource}?${stringify(query)}`
 
     return httpClient.get(url)
   },
   update(resource, params) {
-    return httpClient.put(`${API}/${resource}/${params.id}`, params.data)
+    return httpClient.put(`${resource}/${params.id}`, params.data)
   },
   updateMany(resource, params) {
     const query = {
       filter: JSON.stringify({ id: params.ids }),
     }
-    return httpClient.put(
-      `${API}/${resource}?${stringify(query)}`,
-      params.data
-    )
+    return httpClient.put(`${resource}?${stringify(query)}`, params.data)
   },
   create(resource, params) {
-    return httpClient.post(`${API}/${resource}`, params.data)
+    return httpClient.post(`${resource}`, params.data)
   },
   delete(resource, params) {
-    return httpClient.delete(`${API}/${resource}/${params.id}`)
+    return httpClient.delete(`${resource}/${params.id}`)
   },
   deleteMany(resource, params) {
     const query = {
       filter: JSON.stringify({ ids: params.ids }),
     }
-    return httpClient.delete(
-      `${API}/${resource}?${stringify(query)}`,
-      params.data
-    )
+    return httpClient.delete(`${resource}?${stringify(query)}`, params.data)
   },
 }
