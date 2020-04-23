@@ -20,18 +20,18 @@ export const authProvider = {
     localStorage.removeItem('token')
     return Promise.resolve()
   },
-  checkAuth(params) {
+  checkAuth() {
     return localStorage.getItem('token')
       ? Promise.resolve()
       : Promise.reject({ redirectTo: '/login' })
   },
   checkError(error) {
-    const status = error.status
+    const status = error.response.status
     if ([401, 403].includes(status)) {
       localStorage.removeItem('token')
       return Promise.reject()
     }
     return Promise.resolve()
   },
-  getPermissions: params => Promise.resolve(),
+  getPermissions: () => Promise.resolve(),
 }

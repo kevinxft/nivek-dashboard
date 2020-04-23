@@ -7,16 +7,13 @@ const httpClient = axios.create({
 
 httpClient.interceptors.response.use(res => res.data)
 
-httpClient.interceptors.request.use(
-  config => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      config['headers'] = { Authorization: `Bearer ${token}` }
-    }
-    return config
-  },
-  error => console.error(error),
-)
+httpClient.interceptors.request.use(config => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config['headers'] = { Authorization: `Bearer ${token}` }
+  }
+  return config
+})
 
 export default {
   getList(resource, params) {
